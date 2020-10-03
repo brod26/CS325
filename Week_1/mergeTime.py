@@ -1,3 +1,6 @@
+import time
+import random
+
 # Python program for implementation of MergeSort
 def mergeSort(arr):
     if len(arr) > 1:
@@ -43,3 +46,14 @@ with open("data.txt", "r") as infile:
             outfile.write('\n')
 
 
+# Ranges to be used in the random array
+n = [5000,10000,15000,20000,30000,40000,50000]
+
+# Run Merge Sort and collect the running time on the program
+counter = 0
+while counter < len(n):
+    start = time.time()
+    mergeSort([random.randint(0,10000) for i in range(n[counter])])
+    stop = time.time()
+    print("Sorts executed: " + str(counter + 1), "Run time: " + str(stop - start))
+    counter +=1
