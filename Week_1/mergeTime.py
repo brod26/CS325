@@ -1,7 +1,11 @@
+# Bryan Rodriguez-Andrade
+# CS 325 Fall 2020
+# HW-1 mergeTime
+
 import time
 import random
 
-# Python program for implementation of MergeSort
+# Python code for implementation of MergeSort pulled from https://www.geeksforgeeks.org/merge-sort/
 def mergeSort(arr):
     if len(arr) > 1:
         mid = len(arr)//2  # Finding the mid of the array
@@ -35,25 +39,25 @@ def mergeSort(arr):
             k += 1
 
 
-# Primary File Handling ##TODO Look at the code below and tweak as needed
-with open("data.txt", "r") as infile:
+# File handling
+with open("data.txt", "r") as infile:  
     for line in infile:
-        new_array = (line.strip().split())
-        array_to_sort = [int(i) for i in new_array]
-        mergeSort(array_to_sort)
-        with open('merge.out.txt', "a") as outfile:
+        new_array = (line.strip().split())  #loops through every line in the file and creates a new array
+        array_to_sort = [int(i) for i in new_array]  #creates a new comprehension of the stripped and split array
+        mergeSort(array_to_sort)  #passes the array to the sort
+        with open('merge.out.txt', "a") as outfile:  #writes the newly written array to the outfile
             outfile.write(' '.join(str(i) for i in array_to_sort))
             outfile.write('\n')
 
 
-# Ranges to be used in the random array
+# ranges to be tested against
 n = [5000,10000,15000,20000,30000,40000,50000]
 
-# Run Merge Sort and collect the running time on the program
+# passes the ranges to be tested into the mergesort algorithm and outputs them to the console
 counter = 0
 while counter < len(n):
     start = time.time()
     mergeSort([random.randint(0,10000) for i in range(n[counter])])
     stop = time.time()
-    print("Sorts executed: " + str(counter + 1), "Run time: " + str(stop - start))
+    print("Array Size: " + str(n[counter]), "Run time: " + str(stop - start))
     counter +=1

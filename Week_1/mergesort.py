@@ -1,4 +1,8 @@
-# Python program for implementation of MergeSort
+# Bryan Rodriguez-Andrade
+# CS 325 Fall 2020
+# HW-1 Mergesort
+
+# Python code for implementation of MergeSort pulled from https://www.geeksforgeeks.org/merge-sort/
 def mergeSort(arr):
     if len(arr) > 1:
         mid = len(arr)//2  # Finding the mid of the array
@@ -31,15 +35,15 @@ def mergeSort(arr):
             j += 1
             k += 1
 
-
-# Primary File Handling ##TODO Look at the code below and tweak as needed
-with open("data.txt", "r") as infile:
+# File handling
+with open("data.txt", "r") as infile:  
     for line in infile:
-        new_array = (line.strip().split())
-        array_to_sort = [int(i) for i in new_array]
-        mergeSort(array_to_sort)
-        with open('merge.out.txt', "a") as outfile:
+        new_array = (line.strip().split())  #loops through every line in the file and creates a new array
+        array_to_sort = [int(i) for i in new_array]  #creates a new comprehension of the stripped and split array
+        mergeSort(array_to_sort)  #passes the array to the sort
+        with open('merge.out.txt', "a") as outfile:  #writes the newly written array to the outfile
             outfile.write(' '.join(str(i) for i in array_to_sort))
             outfile.write('\n')
+
 
 
