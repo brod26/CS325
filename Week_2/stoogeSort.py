@@ -40,7 +40,6 @@ with open("data.txt", "r") as infile:
         array_to_sort = [int(i) for i in new_array[1:]]
         size = len(array_to_sort) - 1
         stoogesort(array_to_sort, 0, size)  # passes the array to the sort
-        array_to_sort.insert(0, new_array[0])
         # writes the newly written array to the outfile
         with open('stooge.out.txt', "a") as outfile:
             outfile.write(' '.join(str(i) for i in array_to_sort))
