@@ -1,19 +1,36 @@
+# Bryan Rodriguez-Andrade
+# CS 325 F2020
+# Homework 3, Problem 4(c)
 
+# implementation of knapsack pulled from geeks for geeks https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/ & https://www.geeksforgeeks.org/printing-items-01-knapsack/
+# code was then tweaked to output the required file for this problem
+# geeks for geeks code was commented for my understanding
 def knapsack(wt, val, W, n):
+    """runs a bottom up knapsack algorithm
+
+    Args:
+        wt (array): an array of weights
+        val (array): an array of values
+        W (int): the maximum capacity of the knapsack
+        n (int): the amount of items passed
+
+    Returns:
+        int, [array]: returns the optimized knapsack amount, and items to be taken
+    """
+    # multidimensional matrix used for the DP table
     K = [[0 for w in range(W + 1)]
         for i in range(n + 1)]
 
-    # Build table K[][] in bottom
-    # up manner
+    # this creates the table in a bottom up manner
     for i in range(n + 1):
-        for w in range(W + 1):
-            if i == 0 or w == 0:
+        for w in range(W + 1):  # loop through both rows an columns of table
+            if i == 0 or w == 0:  # sets zero values for the table
                 K[i][w] = 0
-            elif wt[i - 1] <= w:
+            elif wt[i - 1] <= w:  # decides which item to choose
                 K[i][w] = max(val[i - 1]
-                            + K[i - 1][w - wt[i - 1]], K[i - 1][w])
+                            + K[i - 1][w - wt[i - 1]], K[i - 1][w])  # compares the maximum value of the solution directly above the subproblem on the table, or the value of the previous best solution in the row above with the current item's weight subtracted
             else:
-                K[i][w] = K[i - 1][w]
+                K[i][w] = K[i - 1][w]  # if neither item is taken
     result = K[n][W]
     optimized_value = result
     w = W
@@ -40,6 +57,7 @@ def knapsack(wt, val, W, n):
             w = w - wt[i - 1]
     return result, optimized_items
 
+# handles shopping list file and pulls necessary information, compiling together arguments to be passed to the knapsack algorithm. 
 with open('shopping.txt', 'r') as infile, open('results.txt', 'a') as outfile:
     test_cases = int(infile.readline().strip())
     for case in range(test_cases):
